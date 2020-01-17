@@ -9,14 +9,14 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Notes {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Lob
 	private String notes;
-	
+
 	@OneToOne
 	private Recipe recipe;
 
