@@ -6,10 +6,12 @@ package guru.springframework.domain;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * @author Maor Zaken Created on Jan 17, 2020
@@ -24,7 +26,8 @@ public class Ingredient {
 	private String description;
 	private BigDecimal amount;
 
-	// private UnitOfMeasure
+	@OneToOne(fetch = FetchType.EAGER)
+	private UnitOfMeasure uom;
 
 	@ManyToOne
 	private Recipe recipe;
@@ -59,5 +62,13 @@ public class Ingredient {
 
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
+	}
+
+	public UnitOfMeasure getUnitOfMeasure() {
+		return uom;
+	}
+
+	public void setUnitOfMeasure(UnitOfMeasure uom) {
+		this.uom = uom;
 	}
 }
