@@ -122,41 +122,49 @@ public class DataLoader implements CommandLineRunner {
 		Notes notes = new Notes();
 		notes.setNotes("For a very quick guacamole just take a 1/4 cup of salsa and mix it in with your mashed avocados.");
 		perfectGuacamole.setNotes(notes);
+		notes.setRecipe(perfectGuacamole);
 		
 		Ingredient avocado = new Ingredient();
 		avocado.setAmount(new BigDecimal(2));
 		avocado.setDescription("Ripe Avocado");
 		avocado.setUnitOfMeasure(eachUom);
+		avocado.setRecipe(perfectGuacamole);
 		
 		Ingredient salt = new Ingredient();
 		salt.setDescription("Salt");
 		salt.setAmount(new BigDecimal(0.25));
 		salt.setUnitOfMeasure(teaspoonUom);
+		salt.setRecipe(perfectGuacamole);
 		
 		Ingredient lemonJuice = new Ingredient();
 		lemonJuice.setDescription("Lemon Juice");
 		lemonJuice.setAmount(new BigDecimal(1));
 		lemonJuice.setUnitOfMeasure(tablespoonUom);
-		
+		lemonJuice.setRecipe(perfectGuacamole);
+		 
 		Ingredient redOnion = new Ingredient();
 		redOnion.setDescription("Red Onion");
 		redOnion.setAmount(new BigDecimal(2));
 		redOnion.setUnitOfMeasure(tablespoonUom);
+		redOnion.setRecipe(perfectGuacamole);
 		
 		Ingredient serranoChiles = new Ingredient();
 		serranoChiles.setDescription("Serrano chiles");
 		serranoChiles.setAmount(new BigDecimal(2));
 		serranoChiles.setUnitOfMeasure(eachUom);
+		serranoChiles.setRecipe(perfectGuacamole);
 		
 		Ingredient blackPepper = new Ingredient();
 		blackPepper.setDescription("Black Pepper");
 		blackPepper.setAmount(new BigDecimal(1));
 		blackPepper.setUnitOfMeasure(dashUom);
+		blackPepper.setRecipe(perfectGuacamole);
 		
 		Ingredient ripeTomato = new Ingredient();
 		ripeTomato.setDescription("Ripe Tomato");
 		ripeTomato.setAmount(new BigDecimal(0.5));
 		ripeTomato.setUnitOfMeasure(eachUom);
+		ripeTomato.setRecipe(perfectGuacamole);
 		
 		perfectGuacamole.getIngredients().add(avocado);
 		perfectGuacamole.getIngredients().add(salt);
@@ -200,21 +208,25 @@ public class DataLoader implements CommandLineRunner {
 		anchoChiliPowder.setDescription("Ancho chili powder");
 		anchoChiliPowder.setAmount(new BigDecimal(2));
 		anchoChiliPowder.setUnitOfMeasure(teaspoonUom);
+		anchoChiliPowder.setRecipe(spicyGrilledChickenTacos);
 		
 		Ingredient driedOregano = new Ingredient();
 		driedOregano.setDescription("Dried Oregano");
 		driedOregano.setAmount(new BigDecimal(1));
 		driedOregano.setUnitOfMeasure(teaspoonUom);
+		driedOregano.setRecipe(spicyGrilledChickenTacos);
 		
 		Ingredient driedCumin = new Ingredient();
 		driedCumin.setDescription("Dried Cumin");
 		driedCumin.setAmount(new BigDecimal(1));
 		driedCumin.setUnitOfMeasure(teaspoonUom);
+		driedCumin.setRecipe(spicyGrilledChickenTacos);
 		
 		Ingredient sugar = new Ingredient();
 		sugar.setDescription("Sugar");
 		sugar.setAmount(new BigDecimal(1));
 		sugar.setUnitOfMeasure(teaspoonUom);
+		sugar.setRecipe(spicyGrilledChickenTacos);
 		
 		spicyGrilledChickenTacos.getIngredients().add(anchoChiliPowder);
 		spicyGrilledChickenTacos.getIngredients().add(driedOregano);
@@ -222,6 +234,12 @@ public class DataLoader implements CommandLineRunner {
 		spicyGrilledChickenTacos.getIngredients().add(sugar);
 		
 		spicyGrilledChickenTacos.getCategories().add(mexicanCategory);
+		spicyGrilledChickenTacos.getCategories().add(americanCategory);
+		
+		Notes spicyNotes = new Notes();
+		spicyNotes.setNotes("Some Notes");
+		spicyNotes.setRecipe(spicyGrilledChickenTacos);
+		spicyGrilledChickenTacos.setNotes(spicyNotes);
 		
 		recipeService.save(spicyGrilledChickenTacos);
 		
