@@ -9,4 +9,6 @@ insert into unit_of_measure(description) values ('Pinch');
 insert into unit_of_measure(description) values ('Ounce');
 insert into unit_of_measure(description) values ('Splash');
 insert into unit_of_measure(description) values ('Little');
-insert into unit_of_measure(description) values ('One');
+insert into unit_of_measure(description) values ('Each');
+insert into unit_of_measure(description) values ('Dash');
+insert into unit_of_measure(description) values ('Pint');
