@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +22,12 @@ import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Maor Zaken Created on Jan 18, 2020
  */
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -37,11 +41,12 @@ public class DataLoader implements CommandLineRunner {
 		this.uomService = uomService;
 		this.categoryRepository = categoryRepository;
 	}
-
+	
+	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
-
 		loadData();
+		log.debug("Loading bootstrap data");
 	}
 
 	private List<Recipe> loadData() {

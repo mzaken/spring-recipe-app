@@ -13,9 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * @author Maor Zaken Created on Jan 17, 2020
  */
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -27,58 +32,10 @@ public class Ingredient {
 	private BigDecimal amount;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	private UnitOfMeasure uom;
+	private UnitOfMeasure unitOfMeasure;
 
 	@ManyToOne
 	private Recipe recipe;
 	
 	public Ingredient() {}
-	
-	public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
-		this.description = description;
-		this.amount = amount;
-		this.uom = uom;
-	}
-
-
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Recipe getRecipe() {
-		return recipe;
-	}
-
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
-
-	public UnitOfMeasure getUnitOfMeasure() {
-		return uom;
-	}
-
-	public void setUnitOfMeasure(UnitOfMeasure uom) {
-		this.uom = uom;
-	}
 }
