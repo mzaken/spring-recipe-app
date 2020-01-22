@@ -3,7 +3,7 @@
  */
 package guru.springframework.services;
 
-import org.springframework.stereotype.Service;
+import java.util.Set;
 
 import guru.springframework.domain.Recipe;
 
@@ -14,4 +14,5 @@ import guru.springframework.domain.Recipe;
 
 public interface RecipeService extends CrudService<Recipe, Long>{
 
+	public Set<Recipe> getRecipes();
 }

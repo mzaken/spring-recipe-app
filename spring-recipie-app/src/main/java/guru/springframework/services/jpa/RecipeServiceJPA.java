@@ -1,9 +1,11 @@
-/**
+ 	/**
  * 
  */
 package guru.springframework.services.jpa;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,13 @@ public class RecipeServiceJPA implements RecipeService {
 	public void deleteById(Long id) {
 		
 		recipeRepository.deleteById(id);
+	}
+
+	@Override
+	public Set<Recipe> getRecipes() {
+		Set<Recipe> recipes = new HashSet<>();
+		recipeRepository.findAll().forEach(recipes::add);
+		return recipes;
 	}
 
 }
