@@ -13,14 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class IndexController {
 	
-	private final CategoryRepository categoryRepository;
-	private final UnitOfMeasureRepository unitOfMeasureRepository;
 	private final RecipeService recipeService;
 
-	public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository,
-			RecipeService recipeService) {
-		this.categoryRepository = categoryRepository;
-		this.unitOfMeasureRepository = unitOfMeasureRepository;
+	public IndexController(RecipeService recipeService) {
 		this.recipeService = recipeService;
 	}
 
@@ -28,7 +23,7 @@ public class IndexController {
 	public String showIndexPage(Model model) {
 		log.debug("Getting index page");
 		
-		model.addAttribute("recipes",recipeService. findAll());
+		model.addAttribute("recipes", recipeService.findAll());
 	
 		return "index";
 	}
