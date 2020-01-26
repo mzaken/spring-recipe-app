@@ -19,16 +19,16 @@ import guru.springframework.domain.Ingredient;
  * @author Maor Zaken
  * Created on 26 Jan 2020
  */
-public class IngredientCommandToIngredientTest {
+public class IngredientToIngredientCommandTest {
 
-	IngredientCommandToIngredient converter;
+	IngredientToIngredientCommand converter;
 	private static final Long ID_VALUE = new Long(1L);
 	private static final String DESCRIPTION = "description";
 	private static final BigDecimal AMOUNT = new BigDecimal(2);
 	
 	@Before
 	public void setUp() throws Exception {
-		converter = new IngredientCommandToIngredient();
+		converter = new IngredientToIngredientCommand();
 	}
 
 	@Test
@@ -38,24 +38,24 @@ public class IngredientCommandToIngredientTest {
 	
 	@Test
 	public void testEmptyObject() {
-		assertNotNull(converter.convert(new IngredientCommand()));
+		assertNotNull(converter.convert(new Ingredient()));
 	}
 	
 	@Test
 	public void convert() {
 		//given
-		IngredientCommand ingredientCommand = new IngredientCommand();
-		ingredientCommand.setId(ID_VALUE);
-		ingredientCommand.setDescription(DESCRIPTION);
-		ingredientCommand.setAmount(AMOUNT);
+		Ingredient ingredient = new Ingredient();
+		ingredient.setId(ID_VALUE);
+		ingredient.setDescription(DESCRIPTION);
+		ingredient.setAmount(AMOUNT);
 		
 		//when
-		Ingredient ingredient = converter.convert(ingredientCommand);
+		IngredientCommand ingredientCommand = converter.convert(ingredient);
 
 		//then
-		assertEquals(ID_VALUE, ingredient.getId());
-		assertEquals(DESCRIPTION, ingredient.getDescription());
-		assertEquals(AMOUNT, ingredient.getAmount());
+		assertEquals(ID_VALUE, ingredientCommand.getId());
+		assertEquals(DESCRIPTION, ingredientCommand.getDescription());
+		assertEquals(AMOUNT, ingredientCommand.getAmount());
 	}
 
 }

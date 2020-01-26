@@ -16,17 +16,17 @@ import lombok.Synchronized;
  * Created on 26 Jan 2020
  */
 @Component
-public class CategoryCommandToCategory implements Converter<CategoryCommand, Category>{
+public class CategoryToCategoryCommand implements Converter<Category, CategoryCommand>{
 	
 	@Synchronized
 	@Nullable
 	@Override
-	public Category convert(CategoryCommand source) {
+	public CategoryCommand convert(Category source) {
 		if (source == null) {
 			return null;
 		}
 		
-		final Category category = new Category();
+		final CategoryCommand category = new CategoryCommand();
 		category.setDescription(source.getDescription());
 		category.setId(source.getId());
 		

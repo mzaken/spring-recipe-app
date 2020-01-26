@@ -7,8 +7,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-import guru.springframework.commands.CategoryCommand;
-import guru.springframework.domain.Category;
+import guru.springframework.commands.NotesCommand;
+import guru.springframework.domain.Notes;
 import lombok.Synchronized;
 
 /**
@@ -16,21 +16,20 @@ import lombok.Synchronized;
  * Created on 26 Jan 2020
  */
 @Component
-public class CategoryCommandToCategory implements Converter<CategoryCommand, Category>{
-	
+public class NotesToNotesCommand implements Converter<Notes, NotesCommand> {
+
 	@Synchronized
 	@Nullable
 	@Override
-	public Category convert(CategoryCommand source) {
+	public NotesCommand convert(Notes source) {
 		if (source == null) {
 			return null;
 		}
 		
-		final Category category = new Category();
-		category.setDescription(source.getDescription());
-		category.setId(source.getId());
+		NotesCommand notesCommand = new NotesCommand();
+		notesCommand.setId(source.getId());
+		notesCommand.setNotes(source.getNotes());
 		
-		return category;
+		return notesCommand;
 	}
-
 }

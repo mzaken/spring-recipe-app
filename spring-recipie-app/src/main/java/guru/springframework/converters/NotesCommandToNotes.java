@@ -18,12 +18,6 @@ import lombok.Synchronized;
 @Component
 public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 
-	private RecipeCommandToRecipe recipeCommandToRecipe;
-	
-	public NotesCommandToNotes(RecipeCommandToRecipe recipeCommandToRecipe) {
-		this.recipeCommandToRecipe = recipeCommandToRecipe;
-	}
-	
 	@Synchronized
 	@Nullable
 	@Override
@@ -35,7 +29,6 @@ public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 		Notes notes = new Notes();
 		notes.setId(source.getId());
 		notes.setNotes(source.getNotes());
-		notes.setRecipe(recipeCommandToRecipe.convert(source.getRecipe()));
 		
 		return notes;
 	}

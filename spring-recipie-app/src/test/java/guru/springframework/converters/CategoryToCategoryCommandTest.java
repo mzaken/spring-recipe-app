@@ -17,15 +17,15 @@ import guru.springframework.domain.Category;
  * @author Maor Zaken
  * Created on 26 Jan 2020
  */
-public class CategoryCommandToCategoryTest {
+public class CategoryToCategoryCommandTest {
 	
 	public static final Long ID_VALUE = new Long(1L);
 	public static final String DESCRIPTION = "description";
-	CategoryCommandToCategory converter;
+	CategoryToCategoryCommand converter;
 
 	@Before
 	public void setUp() throws Exception {
-		converter = new CategoryCommandToCategory();
+		converter = new CategoryToCategoryCommand();
 	}
 
 	@Test
@@ -35,23 +35,23 @@ public class CategoryCommandToCategoryTest {
 	
 	@Test
 	public void testEmptyObject() {
-		assertNotNull(converter.convert(new CategoryCommand()));
+		assertNotNull(converter.convert(new Category()));
 	}
 	
 	@Test
 	public void convert() {
 		//given
-		CategoryCommand categoryCommand = new CategoryCommand();
-		categoryCommand.setDescription(DESCRIPTION);
-		categoryCommand.setId(ID_VALUE);
-		
 		Category category = new Category();
+		category.setDescription(DESCRIPTION);
+		category.setId(ID_VALUE);
+		
+		CategoryCommand categoryCommand = new CategoryCommand();
 		//when
-		category = converter.convert(categoryCommand);
+		categoryCommand = converter.convert(category);
 		
 		//then
-		assertEquals(ID_VALUE, category.getId());
-		assertEquals(DESCRIPTION, category.getDescription());
+		assertEquals(ID_VALUE, categoryCommand.getId());
+		assertEquals(DESCRIPTION, categoryCommand.getDescription());
 	}
 
 }

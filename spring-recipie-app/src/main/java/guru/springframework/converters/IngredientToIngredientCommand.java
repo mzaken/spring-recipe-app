@@ -16,22 +16,22 @@ import lombok.Synchronized;
  * Created on 26 Jan 2020
  */
 @Component
-public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient>{
+public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand>{
 
 	@Synchronized
 	@Nullable
 	@Override
-	public Ingredient convert(IngredientCommand source) {
+	public IngredientCommand convert(Ingredient source) {
 		if (source == null) {
 			return null;
 		}
 		
-		Ingredient ingredient = new Ingredient();
-		ingredient.setDescription(source.getDescription());
-		ingredient.setAmount(source.getAmount());
-		ingredient.setId(source.getId());
+		IngredientCommand ingredientCommand = new IngredientCommand();
+		ingredientCommand.setDescription(source.getDescription());
+		ingredientCommand.setAmount(source.getAmount());
+		ingredientCommand.setId(source.getId());
 		
-		return ingredient;
+		return ingredientCommand;
 	}
 
 }
