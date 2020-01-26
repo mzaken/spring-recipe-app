@@ -111,6 +111,8 @@ public class DataLoader implements CommandLineRunner {
 		perfectGuacamole.setServings(3);
 		perfectGuacamole.getCategories().add(mexicanCategory);
 		perfectGuacamole.getCategories().add(americanCategory);
+		perfectGuacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+		perfectGuacamole.setSource("Simply Recipes");
 		
 		perfectGuacamole.setDirections("1 Cut the avocado, remove flesh: Cut the avocados in half. Remove the pit. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon. (See How to Cut and Peel an Avocado.) Place in a bowl." +
 				"\n" + 
@@ -184,7 +186,7 @@ public class DataLoader implements CommandLineRunner {
 		
 		Recipe spicyGrilledChickenTacos = new Recipe();
 		//spicyGrilledChickenTacos
-		spicyGrilledChickenTacos.setDescription("Spicy Grilled Chicken Tacose");
+		spicyGrilledChickenTacos.setDescription("Spicy Grilled Chicken Tacos");
 		spicyGrilledChickenTacos.setDifficulty(Difficulty.EASY);
 		spicyGrilledChickenTacos.setCookTime(15);
 		spicyGrilledChickenTacos.setPrepTime(20);
@@ -245,6 +247,8 @@ public class DataLoader implements CommandLineRunner {
 		spicyNotes.setNotes("Some Notes");
 		spicyNotes.setRecipe(spicyGrilledChickenTacos);
 		spicyGrilledChickenTacos.setNotes(spicyNotes);
+		spicyGrilledChickenTacos.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
+		spicyGrilledChickenTacos.setSource("Simply Recipes");
 		
 		recipeService.save(spicyGrilledChickenTacos);
 		

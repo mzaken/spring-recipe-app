@@ -12,7 +12,11 @@ import guru.springframework.domain.Recipe;
  * Created on Jan 18, 2020
  */
 
-public interface RecipeService extends CrudService<Recipe, Long>{
+public interface RecipeService {
 
 	public Set<Recipe> getRecipes();
+	
+	public Recipe findById(Long id);
+
+	public Recipe save(Recipe recipe);
 }

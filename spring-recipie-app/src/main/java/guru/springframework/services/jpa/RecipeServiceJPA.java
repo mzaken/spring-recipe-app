@@ -23,47 +23,29 @@ public class RecipeServiceJPA implements RecipeService {
 	
 	private final RecipeRepository recipeRepository;
 	
-	/**
-	 * @param recipeRepository
-	 */
 	public RecipeServiceJPA(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
 	}
-
-	@Override
-	public Iterable<Recipe> findAll() {
+	
+	public Recipe findById(Long id) {
+		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 		
-		return recipeRepository.findAll();
-	}
-
-	@Override
-	public Optional<Recipe> findById(Long id) {
-		return recipeRepository.findById(id);
-	}
-
-	@Override
-	public Recipe save(Recipe object) {
+		if (!recipeOptional.isPresent()) {
+			throw new RuntimeException("Missing Recipe!");
+		}
 		
-		return recipeRepository.save(object);
+		return recipeOptional.get();
 	}
 
-	@Override
-	public void delete(Recipe object) {
-		
-		recipeRepository.delete(object);
-	}
-
-	@Override
-	public void deleteById(Long id) {
-		
-		recipeRepository.deleteById(id);
-	}
-
-	@Override
 	public Set<Recipe> getRecipes() {
 		Set<Recipe> recipes = new HashSet<>();
 		recipeRepository.findAll().forEach(recipes::add);
 		return recipes;
+	}
+
+	@Override
+	public Recipe save(Recipe recipe) {
+		return recipeRepository.save(recipe);
 	}
 
 }
