@@ -58,7 +58,8 @@ public class RecipeServiceJPA implements RecipeService {
 	public Recipe save(Recipe recipe) {
 		return recipeRepository.save(recipe);
 	}
-
+	
+	@Transactional
 	@Override
 	public RecipeCommand saveRecipeCommand(RecipeCommand command) {
 		Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
@@ -66,6 +67,12 @@ public class RecipeServiceJPA implements RecipeService {
 		Recipe savedRecipe = recipeRepository.save(detachedRecipe);
 		log.debug("Saved Recipe: " + savedRecipe.getId());
 		return recipeToRecipeCommand.convert(savedRecipe) ;
+	}
+	
+	@Transactional
+	@Override
+	public RecipeCommand findCommandById(Long id) {
+		return recipeToRecipeCommand.convert(findById(id));
 	}
 
 }

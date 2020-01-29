@@ -22,4 +22,6 @@ public interface RecipeService {
 	public Recipe save(Recipe recipe);
 	
 	public RecipeCommand saveRecipeCommand(RecipeCommand command);
+	
+	public RecipeCommand findCommandById(Long id);
 }

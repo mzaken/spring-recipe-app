@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeService;
 
 /**
@@ -37,6 +36,13 @@ public class RecipeController {
 	@RequestMapping("/recipe/new")
 	public String newRecipe(Model model) {
 		model.addAttribute("recipe", new RecipeCommand());
+		
+		return "recipe/recipeform";
+	}
+	
+	@RequestMapping("/recipe/{id}/update")
+	public String updateRecipe(@PathVariable String id, Model model) {
+		model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
 		
 		return "recipe/recipeform";
 	}
