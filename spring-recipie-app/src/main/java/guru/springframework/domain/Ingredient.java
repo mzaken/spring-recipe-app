@@ -32,7 +32,7 @@ public class Ingredient {
 	private BigDecimal amount;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	private UnitOfMeasure unitOfMeasure;
+	private UnitOfMeasure uom;
 
 	@ManyToOne
 	private Recipe recipe;

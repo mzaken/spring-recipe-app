@@ -12,11 +12,16 @@ import guru.springframework.domain.Ingredient;
 import lombok.Synchronized;
 
 /**
- * @author Maor Zaken
- * Created on 26 Jan 2020
+ * @author Maor Zaken Created on 26 Jan 2020
  */
 @Component
-public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand>{
+public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand> {
+
+	private final UnitOfMeasureToUnitOfMeasureCommand uomConverter;
+
+	public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand uomConverter) {
+		this.uomConverter = uomConverter;
+	}
 
 	@Synchronized
 	@Nullable
@@ -25,12 +30,13 @@ public class IngredientToIngredientCommand implements Converter<Ingredient, Ingr
 		if (source == null) {
 			return null;
 		}
-		
+
 		IngredientCommand ingredientCommand = new IngredientCommand();
 		ingredientCommand.setDescription(source.getDescription());
 		ingredientCommand.setAmount(source.getAmount());
 		ingredientCommand.setId(source.getId());
-		
+		ingredientCommand.setUom(uomConverter.convert(source.getUom()));
+
 		return ingredientCommand;
 	}
 
