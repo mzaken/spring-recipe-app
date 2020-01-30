@@ -75,4 +75,8 @@ public class RecipeServiceJPA implements RecipeService {
 		return recipeToRecipeCommand.convert(findById(id));
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		recipeRepository.deleteById(id);
+	}
 }

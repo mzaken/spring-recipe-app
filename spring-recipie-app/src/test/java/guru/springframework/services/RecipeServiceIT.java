@@ -5,8 +5,6 @@ package guru.springframework.services;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.junit.Test;

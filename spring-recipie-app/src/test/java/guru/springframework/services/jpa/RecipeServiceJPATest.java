@@ -6,10 +6,7 @@ package guru.springframework.services.jpa;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -91,5 +88,17 @@ class RecipeServiceJPATest {
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+    
+    public void deleteById() {
+    	//given 
+    	Recipe recipe = new Recipe();
+    	recipe.setId(2L);
+    	
+    	//when
+    	recipeService.deleteById(2L);
+    	
+    	//then
+    	verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }

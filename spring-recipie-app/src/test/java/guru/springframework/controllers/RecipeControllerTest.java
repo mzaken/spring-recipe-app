@@ -3,14 +3,16 @@
  */
 package guru.springframework.controllers;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +30,8 @@ import guru.springframework.services.RecipeService;
  * @author Maor Zaken
  * Created on 26 Jan 2020
  */
-class RecipeControllerTest {
 
+class RecipeControllerTest {
 	@Mock
 	RecipeService recipeService;
 	
@@ -101,4 +103,12 @@ class RecipeControllerTest {
 				.andExpect(view().name("redirect:/recipe/2/show"));
 	}
 
+	@Test
+	void deleteRecipe() throws Exception {
+		mockMvc.perform(get("/recipe/2/delete"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/"));
+			
+		verify(recipeService, times(1)).deleteById(anyLong());
+	}
 }

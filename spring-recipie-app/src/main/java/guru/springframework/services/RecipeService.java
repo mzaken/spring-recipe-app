@@ -16,7 +16,7 @@ import guru.springframework.domain.Recipe;
 public interface RecipeService {
 
 	public Set<Recipe> getRecipes();
-	
+		
 	public Recipe findById(Long id);
 
 	public Recipe save(Recipe recipe);
@@ -24,4 +24,6 @@ public interface RecipeService {
 	public RecipeCommand saveRecipeCommand(RecipeCommand command);
 	
 	public RecipeCommand findCommandById(Long id);
+	
+	public void deleteById(Long id);
 }
