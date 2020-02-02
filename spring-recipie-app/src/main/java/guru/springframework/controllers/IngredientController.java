@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
+import guru.springframework.services.UnitOfMeasureService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -15,10 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class IngredientController {
 	private final RecipeService recipeService;
 	private final IngredientService ingredientService;
+	private final UnitOfMeasureService uomService;
 	
-	public IngredientController(RecipeService recipeService, IngredientService ingredientService) {
+	public IngredientController(RecipeService recipeService, IngredientService ingredientService,
+			UnitOfMeasureService uomService) {
 		this.recipeService = recipeService;
 		this.ingredientService = ingredientService;
+		this.uomService = uomService;
 	}
 
 	@GetMapping
@@ -40,4 +44,13 @@ public class IngredientController {
 		return "recipe/ingredient/show";
 	}
 
+	@GetMapping
+	@RequestMapping("recipe/{recipeid}/ingredient/{id}/update")
+	public String updateIngredient(@PathVariable String recipeid,
+							@PathVariable String id, Model model) {
+		model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+		model.addAttribute("uomList", uomService.getAllUomCommands());
+		
+		return "recipe/ingredient/ingredientform";
+	}
 }

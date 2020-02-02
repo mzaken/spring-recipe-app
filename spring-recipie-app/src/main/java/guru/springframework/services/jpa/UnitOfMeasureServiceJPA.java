@@ -1,9 +1,14 @@
 package guru.springframework.services.jpa;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
+import guru.springframework.commands.UnitOfMeasureCommand;
+import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.UnitOfMeasureService;
@@ -12,39 +17,12 @@ import guru.springframework.services.UnitOfMeasureService;
 public class UnitOfMeasureServiceJPA implements UnitOfMeasureService {
 	
 	private final UnitOfMeasureRepository uomRepository;
+	private final UnitOfMeasureToUnitOfMeasureCommand uomToUomCommand;
 	
-	public UnitOfMeasureServiceJPA(UnitOfMeasureRepository uomRepository) {
+	public UnitOfMeasureServiceJPA(UnitOfMeasureRepository uomRepository,
+			UnitOfMeasureToUnitOfMeasureCommand uomToUomCommand) {
 		this.uomRepository = uomRepository;
-	}
-
-	@Override
-	public Iterable<UnitOfMeasure> findAll() {
-		
-		return uomRepository.findAll();
-	}
-
-	@Override
-	public Optional<UnitOfMeasure> findById(Long id) {
-		
-		return findById(id);
-	}
-
-	@Override
-	public UnitOfMeasure save(UnitOfMeasure object) {
-		
-		return uomRepository.save(object);
-	}
-
-	@Override
-	public void delete(UnitOfMeasure object) {
-		
-		uomRepository.delete(object);
-	}
-
-	@Override
-	public void deleteById(Long id) {
-		
-		uomRepository.deleteById(id);
+		this.uomToUomCommand = uomToUomCommand;
 	}
 
 	@Override
@@ -53,5 +31,10 @@ public class UnitOfMeasureServiceJPA implements UnitOfMeasureService {
 		return uomRepository.findByDescription(string);
 	}
 	
-
+	@Override
+	public Set<UnitOfMeasureCommand> getAllUomCommands() {
+		return  StreamSupport.stream(uomRepository.findAll().spliterator(), false)
+				.map(uomToUomCommand::convert)
+				.collect(Collectors.toSet());
+	}
 }
