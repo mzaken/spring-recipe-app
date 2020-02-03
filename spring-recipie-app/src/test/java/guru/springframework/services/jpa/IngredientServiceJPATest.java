@@ -15,11 +15,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import guru.springframework.commands.IngredientCommand;
+import guru.springframework.converters.IngredientCommandToIngredient;
 import guru.springframework.converters.IngredientToIngredientCommand;
 import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
+import guru.springframework.repositories.IngredientRepository;
 import guru.springframework.repositories.RecipeRepository;
+import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.IngredientService;
 
 /**
@@ -30,12 +33,22 @@ public class IngredientServiceJPATest {
 	@Mock
 	RecipeRepository recipeRepository;
 	
+	@Mock
+	IngredientRepository ingredientRepository;
+	
+	@Mock
+	UnitOfMeasureRepository uomRepository;
+	
 	IngredientService ingredientService;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		ingredientService = new IngredientServiceJPA(recipeRepository, new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()));
+		ingredientService = new IngredientServiceJPA(
+				recipeRepository, 
+				new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
+				new IngredientCommandToIngredient(),
+				uomRepository);
 	}
 
 	@Test

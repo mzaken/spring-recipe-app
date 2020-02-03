@@ -3,9 +3,12 @@ package guru.springframework.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import guru.springframework.commands.IngredientCommand;
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;
@@ -52,5 +55,13 @@ public class IngredientController {
 		model.addAttribute("uomList", uomService.getAllUomCommands());
 		
 		return "recipe/ingredient/ingredientform";
+	}
+	
+	@PostMapping
+	@RequestMapping("recipe/{recipeid}/ingredient")
+	public String saveOrUpdate(@PathVariable String recipeid, @ModelAttribute IngredientCommand command) {
+		IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
+		
+		return "redirect:recipe/{recipeid}/ingredient/" + savedCommand.getId() + "/show";
 	}
 }
