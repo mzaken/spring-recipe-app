@@ -109,7 +109,7 @@ public class IngredientControllerTest {
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("id", "")
                 .param("description", "some string"))
-				.andExpect(view().name("redirect:recipe/2/ingredient/3/show"))
+				.andExpect(view().name("redirect:/recipe/2/ingredient/3/show"))
 				.andExpect(status().is3xxRedirection());
 			
 				
