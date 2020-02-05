@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.domain.Ingredient;
+import guru.springframework.domain.Recipe;
 import lombok.Synchronized;
 
 /**
@@ -30,6 +31,13 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
 		ingredient.setDescription(source.getDescription());
 		ingredient.setAmount(source.getAmount());
 		ingredient.setId(source.getId());
+		
+        if(source.getRecipeId() != null){
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
+            ingredient.setRecipe(recipe);
+            recipe.addIngredient(ingredient);
+        }
 		
 		return ingredient;
 	}

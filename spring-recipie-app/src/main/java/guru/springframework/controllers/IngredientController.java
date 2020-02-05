@@ -20,7 +20,7 @@ public class IngredientController {
 	private final RecipeService recipeService;
 	private final IngredientService ingredientService;
 	private final UnitOfMeasureService uomService;
-	
+
 	public IngredientController(RecipeService recipeService, IngredientService ingredientService,
 			UnitOfMeasureService uomService) {
 		this.recipeService = recipeService;
@@ -39,31 +39,31 @@ public class IngredientController {
 
 	@GetMapping
 	@RequestMapping("recipe/{recipeid}/ingredient/{id}/show")
-	public String showIngredientByRecipeIdAndIngredientId(	@PathVariable String recipeid,
-															@PathVariable String id, Model model) {
-		model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(
-				Long.valueOf(recipeid), Long.valueOf(id)));
-		
+	public String showIngredientByRecipeIdAndIngredientId(@PathVariable String recipeid, @PathVariable String id,
+			Model model) {
+		model.addAttribute("ingredient",
+				ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeid), Long.valueOf(id)));
+
 		return "recipe/ingredient/show";
 	}
 
 	@GetMapping
 	@RequestMapping("recipe/{recipeid}/ingredient/{id}/update")
-	public String updateIngredient(@PathVariable String recipeid,
-							@PathVariable String id, Model model) {
-		//model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
-		model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(
-				Long.valueOf(recipeid), Long.valueOf(id)));
+	public String updateIngredient(@PathVariable String recipeid, @PathVariable String id, Model model) {
+		model.addAttribute("ingredient",
+				ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeid), Long.valueOf(id)));
 		model.addAttribute("uomList", uomService.getAllUomCommands());
-		
+
 		return "recipe/ingredient/ingredientform";
 	}
-	
-	@PostMapping
-	@RequestMapping("recipe/{recipeid}/ingredient")
-	public String saveOrUpdate(@PathVariable String recipeid, @ModelAttribute IngredientCommand command) {
+
+	@PostMapping("recipe/{recipeid}/ingredient")
+	public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
 		IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
-		
-		return "redirect:recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+
+		log.debug("saved receipe id:" + savedCommand.getRecipeId());
+		log.debug("saved ingredient id:" + savedCommand.getId());
+
+		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
 	}
 }
