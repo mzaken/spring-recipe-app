@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.commands.IngredientCommand;
+import guru.springframework.commands.RecipeCommand;
+import guru.springframework.commands.UnitOfMeasureCommand;
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;
@@ -65,5 +67,23 @@ public class IngredientController {
 		log.debug("saved ingredient id:" + savedCommand.getId());
 
 		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+	}
+	
+	@GetMapping("recipe/{recipeid}/ingredient/new")
+	public String newIngredient(@PathVariable String recipeid, Model model) {
+		
+		RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeid));
+		if (recipeCommand == null) {
+			//TODO: add error handling
+		}
+		
+		IngredientCommand ingredientCommand = new IngredientCommand();
+		ingredientCommand.setRecipeId(recipeCommand.getId());
+
+		model.addAttribute("ingredient", new IngredientCommand());
+		ingredientCommand.setUom(new UnitOfMeasureCommand());
+		model.addAttribute("uomList", uomService.getAllUomCommands());
+		
+		return "recipe/ingredient/ingredientform";
 	}
 }
