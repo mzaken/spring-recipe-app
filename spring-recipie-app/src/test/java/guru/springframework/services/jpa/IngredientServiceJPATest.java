@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.converters.IngredientCommandToIngredient;
 import guru.springframework.converters.IngredientToIngredientCommand;
+import guru.springframework.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
@@ -47,7 +48,7 @@ public class IngredientServiceJPATest {
 		ingredientService = new IngredientServiceJPA(
 				recipeRepository, 
 				new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
-				new IngredientCommandToIngredient(),
+				new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
 				uomRepository);
 	}
 

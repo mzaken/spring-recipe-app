@@ -43,7 +43,7 @@ public class RecipeCommandToRecipeTest {
 	@Before
 	public void setUp() throws Exception {
 		converter = new RecipeCommandToRecipe
-				(new CategoryCommandToCategory(), new NotesCommandToNotes(), new IngredientCommandToIngredient());
+				(new CategoryCommandToCategory(), new NotesCommandToNotes(), new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()));
 	}
 
 	@Test

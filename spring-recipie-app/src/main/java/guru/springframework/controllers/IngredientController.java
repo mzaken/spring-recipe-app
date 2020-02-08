@@ -69,10 +69,10 @@ public class IngredientController {
 		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
 	}
 	
-	@GetMapping("recipe/{recipeid}/ingredient/new")
-	public String newIngredient(@PathVariable String recipeid, Model model) {
+	@GetMapping("recipe/{recipeId}/ingredient/new")
+	public String newIngredient(@PathVariable String recipeId, Model model) {
 		
-		RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeid));
+		RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
 		if (recipeCommand == null) {
 			//TODO: add error handling
 		}
@@ -80,7 +80,7 @@ public class IngredientController {
 		IngredientCommand ingredientCommand = new IngredientCommand();
 		ingredientCommand.setRecipeId(recipeCommand.getId());
 
-		model.addAttribute("ingredient", new IngredientCommand());
+		model.addAttribute("ingredient", ingredientCommand);
 		ingredientCommand.setUom(new UnitOfMeasureCommand());
 		model.addAttribute("uomList", uomService.getAllUomCommands());
 		
