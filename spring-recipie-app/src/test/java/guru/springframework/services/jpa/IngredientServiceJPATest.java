@@ -5,7 +5,10 @@ package guru.springframework.services.jpa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
@@ -49,7 +52,8 @@ public class IngredientServiceJPATest {
 				recipeRepository, 
 				new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
 				new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
-				uomRepository);
+				uomRepository,
+				ingredientRepository);
 	}
 
 	@Test
@@ -79,6 +83,29 @@ public class IngredientServiceJPATest {
 		//then
 		assertEquals(3L, ingredientCommand.getId());
 		assertEquals(1L, ingredientCommand.getRecipeId());
+	}
+	
+	@Test
+	public void testDeleteByRecipeIdAndIngredientId() {
+		//given
+		Recipe recipe = new Recipe();
+		recipe.setId(1L);
+		
+		Ingredient ingredient1 = new Ingredient();
+	    ingredient1.setId(1L);
+	    recipe.addIngredient(ingredient1);
+	    ingredient1.setRecipe(recipe);
+	    
+	    Optional<Recipe> recipeOptional = Optional.of(recipe);
+	    
+	    when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+	    
+	    //when
+	    ingredientService.deleteByRecipeIdAndIngredientId(1L, 1L);
+	    
+	    //then
+	    verify(recipeRepository, times(1)).findById(anyLong());
+	    verify(recipeRepository, times(1)).save(any(Recipe.class));
 	}
 
 }

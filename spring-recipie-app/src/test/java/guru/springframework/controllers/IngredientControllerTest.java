@@ -25,6 +25,8 @@ import org.springframework.ui.Model;
 
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.repositories.IngredientRepository;
+import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;
@@ -121,12 +123,11 @@ public class IngredientControllerTest {
 	public void testDeleteIngredient() throws Exception {
 		//given
 		
-		mockMvc.perform(get("/recipe/2/ingredient/delete"))
+		mockMvc.perform(get("/recipe/2/ingredient/3/delete"))
 				.andExpect(status().is3xxRedirection() )
 				.andExpect(view().name("redirect:/recipe/2/ingredients"));
 		
-		verify(ingredientService, times(1)).deleteById(anyLong(), anyLong());
-		
+		verify(ingredientService, times(1)).deleteByRecipeIdAndIngredientId(anyLong(), anyLong());
 	}
 	
 }

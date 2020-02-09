@@ -133,7 +133,8 @@ public class IngredientServiceJPA implements IngredientService{
 		Ingredient ingredient = ingredientOptional.get();
 		
 		recipe.getIngredients().remove(ingredient);
-		ingredientRepository.delete(ingredient);
+		ingredient.setRecipe(null);
+		//ingredientRepository.delete(ingredient);
 		recipeRepository.save(recipe);
 	}
 	
