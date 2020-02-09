@@ -86,4 +86,6 @@ public class IngredientController {
 		
 		return "recipe/ingredient/ingredientform";
 	}
+	
+	
 }

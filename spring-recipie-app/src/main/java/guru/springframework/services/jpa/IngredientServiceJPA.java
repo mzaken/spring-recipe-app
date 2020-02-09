@@ -4,7 +4,6 @@
 package guru.springframework.services.jpa;
 
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -31,15 +30,17 @@ public class IngredientServiceJPA implements IngredientService{
 	private final IngredientToIngredientCommand ingredientToIngredientCommand;
 	private final IngredientCommandToIngredient ingredientCommandToIngredient;
 	private final UnitOfMeasureRepository uomRepository;
+	private final IngredientRepository ingredientRepository;
 	
 	public IngredientServiceJPA(RecipeRepository recipeRepository,
 			IngredientToIngredientCommand ingredientToIngredientCommand,
-			IngredientCommandToIngredient ingredientCommandToIngredient,
-			UnitOfMeasureRepository uomRepository) {
+			IngredientCommandToIngredient ingredientCommandToIngredient, UnitOfMeasureRepository uomRepository,
+			IngredientRepository ingredientRepository) {
 		this.recipeRepository = recipeRepository;
 		this.ingredientToIngredientCommand = ingredientToIngredientCommand;
 		this.ingredientCommandToIngredient = ingredientCommandToIngredient;
 		this.uomRepository = uomRepository;
+		this.ingredientRepository = ingredientRepository;
 	}
 
 	@Override
@@ -108,6 +109,32 @@ public class IngredientServiceJPA implements IngredientService{
 		}
 		
 		return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+	}
+	
+	@Override
+	public void deleteByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) {
+		Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+		
+		if (!recipeOptional.isPresent()) {
+			//TODO - handle error missing recipe.
+		}
+		
+		Recipe recipe = recipeOptional.get();
+		
+		Optional<Ingredient> ingredientOptional = recipe.getIngredients().stream()
+				.filter(ingredient -> ingredient.getId().equals(ingredientId))
+				.findFirst();
+				
+		
+		if (!ingredientOptional.isPresent()) {
+			//TODO: handle error ingredient not found
+		}
+		
+		Ingredient ingredient = ingredientOptional.get();
+		
+		recipe.getIngredients().remove(ingredient);
+		ingredientRepository.delete(ingredient);
+		recipeRepository.save(recipe);
 	}
 	
 }
