@@ -5,13 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>guru.springframework.spring-recipe-app</groupId>
-		<artifactId>>spring-recipe-app</artifactId>
+		<artifactId>spring-recipe-app</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>guru.springframework.spring-recipe-app</groupId>
+	
 	<artifactId>recipe-app-data</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>recipe-app-data</name>
 	<description>A Recipie application using spring</description>
 
