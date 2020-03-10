@@ -9,10 +9,10 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>guru.springframework.spring-recipie-app</groupId>
-	<artifactId>spring-recipie-app</artifactId>
+	<groupId>guru.springframework.spring-recipe-app</groupId>
+	<artifactId>recipe-app-data</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-recipie-app</name>
+	<name>recipe-app-data</name>
 	<description>A Recipie application using spring</description>
 
 	<properties>
