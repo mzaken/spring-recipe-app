@@ -22,6 +22,7 @@
 	
 	<modules>
 		<module>recipie-app-data</module>
+		<module>recipe-app-client</module>
 	</modules>
 
 
