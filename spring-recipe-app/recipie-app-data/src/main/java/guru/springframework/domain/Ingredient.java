@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"recipe"})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 public class Ingredient {
 
@@ -36,6 +40,7 @@ public class Ingredient {
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure uom;
 
+	@JsonManagedReference
 	@ManyToOne
 	private Recipe recipe;
 	

@@ -3,22 +3,27 @@
  */
 package guru.springframework.controllers;
 
-import org.springframework.stereotype.Controller;
+import java.util.Set;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeService;
 
 /**
  * @author Maor Zaken
  * Created on 26 Jan 2020
  */
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class RecipeController {
 	
 	private final RecipeService recipeService;
@@ -27,8 +32,14 @@ public class RecipeController {
 		this.recipeService = recipeService;
 	}
 	
+	@GetMapping("/recipes")
+	public ResponseEntity<Set<Recipe>> getAll() {
+		return ResponseEntity.ok(this.recipeService.getRecipes());
+	}
+	
 	@GetMapping("/recipe/{id}/show")
 	public String showById(@PathVariable String id, Model model) {
+
 		model.addAttribute("recipe", recipeService.findById(new Long(id)));
 		
 		return "recipe/show";
