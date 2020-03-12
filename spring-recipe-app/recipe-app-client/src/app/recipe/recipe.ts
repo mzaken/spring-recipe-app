@@ -1,4 +1,6 @@
-import { Notes } from './recipe-detail/notes';
+import { Category } from './category';
+import { Notes } from './notes';
+import { Ingredient } from './ingredient';
 
 export interface Recipe {
     id: number;
@@ -10,8 +12,9 @@ export interface Recipe {
     url: string;
     imgUrl: string;
     notes: Notes;
-    categories: string[];
+    categories: Category[];
     image: string;
     directions: string;
     difficulty: string;
+    ingredients: Ingredient[];
 }

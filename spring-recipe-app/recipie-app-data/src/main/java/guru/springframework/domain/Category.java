@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,7 +25,7 @@ public class Category {
 	
 	private String description;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToMany(mappedBy = "categories")
 	private Set<Recipe> recipes = new HashSet<>();
 }

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +24,7 @@ public class Notes {
 	@Lob
 	private String notes;
 
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToOne
 	private Recipe recipe;
 }

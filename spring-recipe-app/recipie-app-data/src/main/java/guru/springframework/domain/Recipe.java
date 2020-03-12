@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -45,7 +46,7 @@ public class Recipe {
 	@Lob
 	private String directions;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
 	private Set<Ingredient> ingredients = new HashSet<>();
 	
@@ -55,11 +56,11 @@ public class Recipe {
 	@Enumerated(value = EnumType.STRING)
 	private Difficulty difficulty;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
 	private Notes notes;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name = "recipe_category",
 			joinColumns = @JoinColumn(name = "recipe_id"),

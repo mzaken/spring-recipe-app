@@ -1,0 +1,176 @@
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form #f="ngForm" (ngSubmit)="submit(f)">
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Edit Recipe Information</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Recipe Description:</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        ngModel
+                                        #name="ngModel"
+                                        type="text"
+                                        name="description"
+                                        value="{{ recipe?.description }}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Categories:</label>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="checkbox" value=""/>
+                                            Cat 1
+                                        </label>
+                                    </div>
+                                    <div class="radio" th:remove="all">
+                                        <label>
+                                            <input type="checkbox" value=""/>
+                                            Cat 2
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Prep Time:</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        ngModel
+                                        #prepTime="ngModel"
+                                        name="prepTime"
+                                        value="{{ recipe?.prepTime }}"/>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Cooktime:</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        ngModel
+                                        #cookTime="ngModel"
+                                        name="cookTime"
+                                        value="{{ recipe?.cookTime }}"/>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Difficulty:</label>
+                                    	<select class="form-control">
+                                    		<option *ngFor="let difficulty of difficulties">{{ difficulty }}</option>
+                                    	</select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Servings:</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        ngModel
+                                        #servings="ngModel"
+                                        name="servings"
+                                        value="{{ recipe?.servings }}"/>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Source:</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        ngModel
+                                        #source="ngModel"
+                                        name="source"
+                                        value="{{ recipe?.source }}"/>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>URL:</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        ngModel
+                                        #url="ngModel"
+                                        name="url"
+                                        value="{{ recipe?.url }}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-11 ">
+                                    <h1 class="panel-title">Ingredients</h1>
+                                </div>
+                                <div class="col-md-1">
+                                    <a class="btn btn-default" href="#" role="button">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li *ngFor="let ingredient of recipe?.ingredients">
+                                            {{ ingredient.amount }} {{ ingredient.uom?.description}}
+                                            {{ ingredient.description }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Directions</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <textarea 
+                                        class="form-control" 
+                                        rows="3" 
+                                        ngModel
+                                        name="directions"
+                                        #directions="ngModel"
+                                        value="{{ recipe?.directions }}"
+                                        ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Notes</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <textarea 
+                                        class="form-control" 
+                                        rows="3" 
+                                        ngModel
+                                        name="notes"
+                                        #notes="ngModel"
+                                        value="{{ recipe?.notes?.notes }}"
+                                        ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<p>
+    <!-- {{ f.value | json }} -->
+</p>

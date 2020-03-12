@@ -6,7 +6,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                     	<div>
-	                        <h1 class="panel-title">{{ recipe.description }}</h1>
+	                        <h1 class="panel-title">{{ recipe?.description }}</h1>
                     	</div>
 						<div class="col-md-1">
                             <a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Upload Image</a>
@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-md-9">
                                 <ul>
-                                     <li *ngFor="let category of recipe.categories">{{ category.description }}</li>
+                                     <li *ngFor="let category of recipe?.categories">{{ category.description }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -28,13 +28,13 @@
                                 <h5>Prep Time:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>{{ recipe.prepTime + 'min'}}</p>
+                                <p>{{ recipe?.prepTime + 'min'}}</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Difficulty:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>{{ recipe.difficulty }}</p>
+                                <p>{{ recipe?.difficulty }}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -42,13 +42,13 @@
                                 <h5>Cooktime:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>{{ recipe.cookTime + 'min'}}</p>
+                                <p>{{ recipe?.cookTime + 'min'}}</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Servings:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>{{ recipe.servings }}</p>
+                                <p>{{ recipe?.servings }}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -56,18 +56,18 @@
                                 <h5>Source:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>{{ recipe.source }}</p>
+                                <p>{{ recipe?.source }}</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>URL:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>{{ recipe.url }}</p>
+                                <p>{{ recipe?.url }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="panel panel-primary">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-11">
@@ -78,19 +78,17 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <ul>
-                                    <li *ngFor="let ingredient of recipe.ingredients">
-                                        {{ ingredient.amount }} + ' ' + {{ ingredient.uom.description }} + ' ' + 
+                                    <li *ngFor="let ingredient of recipe?.ingredients">{{ ingredient.amount }} {{ ingredient.uom.description }}
                                     				{{ ingredient.description }}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title" >Directions</h1>
@@ -98,7 +96,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p>{{ recipe.directions }}</p>
+                                <p>{{ recipe?.directions }}</p>
                             </div>
                         </div>
                     </div>
@@ -110,7 +108,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p>{{ recipe.notes.notes }}</p>
+                                <p>{{ recipe?.notes?.notes }}</p>
                             </div>
                         </div>
                     </div>
