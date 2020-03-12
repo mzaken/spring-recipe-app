@@ -15,6 +15,10 @@ export class DataService<T> {
               catchError(this.handleError));
   }
 
+  get(id: number) {
+    return this.http.get<T>(this.url + '/' + id);
+  }
+
   create(resource) {
     return this.http.post(this.url, JSON.stringify(resource))
             .pipe(
