@@ -21,8 +21,8 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent }, 
-      { path: }
+      { path: 'recipe/:id', component: RecipeDetailComponent},
+      { path: '', component: HomeComponent }
     ])
   ],
   providers: [RecipeService],

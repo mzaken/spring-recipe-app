@@ -9,6 +9,6 @@ import { DataService } from './data.service';
 export class RecipeService extends DataService<Recipe>{
 
   constructor(http: HttpClient) {
-    super('http://localhost:8082/recipes', http);
+    super('http://localhost:8082/recipe', http);
    }
 }
