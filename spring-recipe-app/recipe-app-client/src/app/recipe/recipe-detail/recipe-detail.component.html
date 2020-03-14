@@ -9,7 +9,7 @@
 	                        <h1 class="panel-title">{{ recipe?.description }}</h1>
                     	</div>
 						<div class="col-md-1">
-                            <a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Upload Image</a>
+                            <a class="btn btn-default" routerLink="/recipe/{{ recipe?.id }}/image" role="button">Upload Image</a>
 						</div>
                     </div>
                     <div class="panel-body">

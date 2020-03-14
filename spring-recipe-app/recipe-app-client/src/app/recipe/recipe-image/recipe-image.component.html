@@ -10,12 +10,12 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-5">
-                                <form #imgForm="ngForm" (ngSubmit)="uploadImage(imgForm)"
+                                <form #imgForm="ngForm" (ngSubmit)="uploadImage(fileInput)"
                                     enctype="multipart/form-data"
                                     >
                                     <label class="control-label">Select File</label>
                                     <input 
-                                        #imageInput 
+                                        #fileInput 
                                         id="imagefile" 
                                         name="imagefile"
                                         accept="Image/*" 

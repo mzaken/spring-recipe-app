@@ -29,6 +29,7 @@ import { ImageService } from './services/image.service';
     FormsModule,
     RouterModule.forRoot([
       { path: 'recipe/:id/update', component: NewRecipeComponent},
+      { path: 'recipe/:id/image', component: RecipeImageComponent},
       { path: 'recipe/:id', component: RecipeDetailComponent},
       { path: 'recipe/new', component: NewRecipeComponent},
       { path: '', component: HomeComponent }

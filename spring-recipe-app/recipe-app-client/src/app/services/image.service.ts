@@ -5,10 +5,14 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ImageService {
-  url = "http://localhost:8082/recipe/";
+  url: string = "http://localhost:8082/recipe";
+
   constructor(private http: HttpClient) { }
 
-  uploadImage(image) {
-    //this.http.post(url, image, {})
+  uploadImage(file, recipeId) {
+    const data: FormData = new FormData();
+    data.append('file', file);
+
+    return this.http.post(this.url + '/' + recipeId + '/image', data);
   }
 }
