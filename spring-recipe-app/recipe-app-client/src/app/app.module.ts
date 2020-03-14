@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
 import { RouterModule } from '@angular/router';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
+import { RecipeImageComponent } from './recipe/recipe-image/recipe-image.component';
+import { ImageService } from './services/image.service';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
     AppComponent,
     HomeComponent,
     RecipeDetailComponent,
-    NewRecipeComponent
+    NewRecipeComponent,
+    RecipeImageComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
       { path: '', component: HomeComponent }
     ])
   ],
-  providers: [RecipeService],
+  providers: [RecipeService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
