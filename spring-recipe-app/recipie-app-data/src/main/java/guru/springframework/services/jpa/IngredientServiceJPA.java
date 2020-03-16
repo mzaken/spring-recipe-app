@@ -137,5 +137,26 @@ public class IngredientServiceJPA implements IngredientService{
 		//ingredientRepository.delete(ingredient);
 		recipeRepository.save(recipe);
 	}
+
+	@Override
+	public Ingredient getByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) {
+		Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+		
+		if (!recipeOptional.isPresent()) {
+			//TODO: add error handling
+			log.error("Could not find Recipe with recipeId: " + recipeId);
+		}
+		
+		Recipe recipe = recipeOptional.get();
+		Optional<Ingredient> ingredientOptional = recipe.getIngredients().stream()
+				.filter(ingredient -> ingredient.getId().equals(ingredientId)).findFirst();
+		
+		if (!ingredientOptional.isPresent()) {
+			//TODO: add error handling
+			log.error("Could not find ingredient with id: " + ingredientId + " for recipe with recipeId: " + recipeId);
+		}
+		
+		return ingredientOptional.get();
+	}
 	
 }

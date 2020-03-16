@@ -1,4 +1,4 @@
-import { UnitOfMeasure } from './unitOfMeasure';
+import { UnitOfMeasure } from '../unitOfMeasure';
 
 export interface Ingredient {
     id: number;

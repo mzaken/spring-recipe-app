@@ -1,6 +1,6 @@
 import { Category } from './category';
 import { Notes } from './notes';
-import { Ingredient } from './ingredient';
+import { Ingredient } from './ingredient/ingredient';
 
 export interface Recipe {
     id: number;

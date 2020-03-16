@@ -12,6 +12,9 @@ import { RouterModule } from '@angular/router';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { RecipeImageComponent } from './recipe/recipe-image/recipe-image.component';
 import { ImageService } from './services/image.service';
+import { IngredientListComponent } from './recipe/ingredient/ingredient-list/ingredient-list.component';
+import { IngredientDetailComponent } from './recipe/ingredient/ingredient-detail/ingredient-detail.component';
+import { IngredientService } from './services/ingredient.service';
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { ImageService } from './services/image.service';
     HomeComponent,
     RecipeDetailComponent,
     NewRecipeComponent,
-    RecipeImageComponent
+    RecipeImageComponent,
+    IngredientListComponent,
+    IngredientDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -28,14 +33,16 @@ import { ImageService } from './services/image.service';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      { path: 'recipe/:id/ingredient/:ingredientId', component: IngredientDetailComponent},
       { path: 'recipe/:id/update', component: NewRecipeComponent},
+      { path: 'recipe/:id/ingredient', component: IngredientListComponent},
       { path: 'recipe/:id/image', component: RecipeImageComponent},
       { path: 'recipe/:id', component: RecipeDetailComponent},
       { path: 'recipe/new', component: NewRecipeComponent},
       { path: '', component: HomeComponent }
     ])
   ],
-  providers: [RecipeService, ImageService],
+  providers: [RecipeService, ImageService, IngredientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

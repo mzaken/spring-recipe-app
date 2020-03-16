@@ -4,6 +4,7 @@
 package guru.springframework.services;
 
 import guru.springframework.commands.IngredientCommand;
+import guru.springframework.domain.Ingredient;
 
 /**
  * @author Maor Zaken
@@ -16,4 +17,6 @@ public interface IngredientService {
 	IngredientCommand saveIngredientCommand(IngredientCommand command);
 
 	void deleteByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
+
+	Ingredient getByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
 }

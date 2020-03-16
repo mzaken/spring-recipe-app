@@ -1,16 +1,20 @@
 package guru.springframework.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
+import guru.springframework.domain.Ingredient;
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;
@@ -30,7 +34,7 @@ public class IngredientController {
 		this.uomService = uomService;
 	}
 
-	@GetMapping("/recipe/{recipeid}/ingredients")
+	@GetMapping("/recipe/{recipeid}/ingredient")
 	public String showIngredients(@PathVariable String recipeid, Model model) {
 		log.debug("Getting ingredient list for recipe id:" + recipeid);
 		model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeid)));
@@ -45,6 +49,18 @@ public class IngredientController {
 				ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeid), Long.valueOf(id)));
 
 		return "recipe/ingredient/show";
+	}
+	
+	@GetMapping("recipe/{recipeid}/ingredient/{id}")
+	public ResponseEntity<Ingredient> getIngredientByRecipeIdAndIngredientId(@PathVariable String recipeid, @PathVariable String id) {
+		
+		Ingredient ingredient = ingredientService.getByRecipeIdAndIngredientId(Long.valueOf(recipeid), Long.valueOf(id));
+		
+		if (ingredient == null) {
+			return new ResponseEntity<Ingredient>(HttpStatus.NOT_FOUND);
+		}
+		
+		return ResponseEntity.ok(ingredient);
 	}
 
 	@GetMapping("recipe/{recipeid}/ingredient/{id}/update")
