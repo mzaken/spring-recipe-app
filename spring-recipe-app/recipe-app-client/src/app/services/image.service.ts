@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ImageService {
-  url: string = "http://localhost:8082/recipe";
+  url: string = "http://localhost:8082/recipes";
 
   constructor(private http: HttpClient) { }
 

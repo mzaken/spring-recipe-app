@@ -1,8 +1,8 @@
-import { UnitOfMeasure } from '../unitOfMeasure';
+import { UnitOfMeasure } from '../recipes/unitOfMeasure';
 
 export interface Ingredient {
     id: number;
     description: string;
     amount: number;
-    unitOfMeasure: UnitOfMeasure;
+    uom: UnitOfMeasure;
 }

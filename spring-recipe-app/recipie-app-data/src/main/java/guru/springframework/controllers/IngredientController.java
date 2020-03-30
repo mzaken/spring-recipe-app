@@ -1,15 +1,14 @@
 package guru.springframework.controllers;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
@@ -21,7 +20,8 @@ import guru.springframework.services.UnitOfMeasureService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class IngredientController {
 	private final RecipeService recipeService;
 	private final IngredientService ingredientService;
@@ -62,6 +62,18 @@ public class IngredientController {
 		
 		return ResponseEntity.ok(ingredient);
 	}
+	
+	@GetMapping("ingredients/{id}")
+	public ResponseEntity<Ingredient> getIngredientById(@PathVariable String id) {
+		
+		Ingredient ingredient = ingredientService.getIngredientById(Long.valueOf(id));
+		
+		if (ingredient == null) {
+			return new ResponseEntity<Ingredient>(HttpStatus.NOT_FOUND);
+		}
+		
+		return ResponseEntity.ok(ingredient);
+	}
 
 	@GetMapping("recipe/{recipeid}/ingredient/{id}/update")
 	public String updateIngredient(@PathVariable String recipeid, @PathVariable String id, Model model) {
@@ -72,14 +84,26 @@ public class IngredientController {
 		return "recipe/ingredient/ingredientform";
 	}
 
-	@PostMapping("recipe/{recipeid}/ingredient")
-	public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
-		IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
-
-		log.debug("saved receipe id:" + savedCommand.getRecipeId());
-		log.debug("saved ingredient id:" + savedCommand.getId());
-
-		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+	/*
+	 * @PostMapping("recipe/{recipeid}/ingredient") public String
+	 * saveOrUpdate(@ModelAttribute IngredientCommand command) { IngredientCommand
+	 * savedCommand = ingredientService.saveIngredientCommand(command);
+	 * 
+	 * log.debug("saved receipe id:" + savedCommand.getRecipeId());
+	 * log.debug("saved ingredient id:" + savedCommand.getId());
+	 * 
+	 * return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" +
+	 * savedCommand.getId() + "/show"; }
+	 */
+	
+	@PostMapping("ingredients/{id}")
+	public Ingredient saveOrUpdate(@ModelAttribute Ingredient ingredient) {
+		Ingredient savedIngredient = ingredientService.saveIngredient(ingredient);
+		
+		log.debug("saved receipe id:" + savedIngredient.getRecipe().getId());
+		log.debug("saved ingredient id:" + savedIngredient.getId());
+		
+		return savedIngredient;
 	}
 	
 	@GetMapping("recipe/{recipeId}/ingredient/new")

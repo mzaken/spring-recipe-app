@@ -20,7 +20,8 @@ export class IngredientDetailComponent implements OnInit {
       .subscribe(params => {
         ingredientId = params.get('ingredientId');
         this.ingredientService.get(ingredientId)
-          .subscribe(ingredient => this.ingredient = ingredient);
+          .subscribe(ingredient => {
+            this.ingredient = ingredient});
       })
   }
 }

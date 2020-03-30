@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class IngredientServiceJPA implements IngredientService{
 
+
 	private final RecipeRepository recipeRepository;
 	private final IngredientToIngredientCommand ingredientToIngredientCommand;
 	private final IngredientCommandToIngredient ingredientCommandToIngredient;
@@ -43,6 +44,41 @@ public class IngredientServiceJPA implements IngredientService{
 		this.ingredientRepository = ingredientRepository;
 	}
 
+	@Override
+	public Ingredient getIngredientById(Long ingredientId) {
+		Optional<Ingredient> ingredientOptional = ingredientRepository.findById(ingredientId);
+		
+		if (!ingredientOptional.isPresent()) {
+			//TODO: handle error
+			log.error("Could not find ingredient with id: " + ingredientId);
+			return null;
+		}
+		
+		return ingredientOptional.get();
+	}
+
+	@Override
+	public Ingredient saveIngredient(Ingredient ingredient) {
+		Optional<Ingredient> oldIngredientOptional= ingredientRepository.findById(ingredient.getId());
+		
+		if (!oldIngredientOptional.isPresent() ) {
+			//TODO: finish implementation for new ingredient. (how to connect it to recipe)
+		}
+		
+		Ingredient oldIngredient = oldIngredientOptional.get();
+		
+		if (oldIngredient.getRecipe() == null ) {
+			//TODO: handle error
+			log.error("could not find recipe for ingredient with id: " + ingredient.getId());
+		}
+		
+		oldIngredient.setAmount(ingredient.getAmount());
+		oldIngredient.setDescription(ingredient.getDescription());
+		oldIngredient.setUom(ingredient.getUom());
+		
+		return ingredientRepository.save(oldIngredient);
+	}
+	
 	@Override
 	public IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) {
 		

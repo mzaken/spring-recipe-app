@@ -21,8 +21,8 @@
                             <tr *ngFor="let recipe of recipes">
                                 <td>{{ recipe.id }}</td>
                                 <td>{{ recipe.description }}</td>
-                                <td> <a [routerLink]="['/recipe', recipe.id]">View</a>
-                                <td> <a routerLink="/recipe/{{recipe.id}}/update">Update</a>
+                                <td> <a [routerLink]="['/recipes', recipe.id]">View</a>
+                                <td> <a routerLink="/recipes/{{recipe.id}}/update">Update</a>
                                 <td> <a href="#" th:href="@{'recipe/' + ${recipe.id}  + '/delete'}">Delete</a>
                             </tr>
                         </table>

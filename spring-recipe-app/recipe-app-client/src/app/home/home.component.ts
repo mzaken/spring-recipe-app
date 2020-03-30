@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from './../services/recipe.service';
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../recipe/recipe';
+import { Recipe } from '../recipes/recipe';
 
 @Component({
   selector: 'home',
@@ -16,10 +16,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.recipeService.getAll()
       .subscribe(response => {
-        this.recipes = response 
+        this.recipes = response
         console.log(this.recipes);
       });
-      
+
   }
 
 }

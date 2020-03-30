@@ -33,13 +33,13 @@ public class RecipeController {
 		this.recipeService = recipeService;
 	}
 	
-	@GetMapping("/recipe")
+	@GetMapping("/recipes")
 	@ResponseBody
 	public ResponseEntity<Set<Recipe>> getAll() {
 		return ResponseEntity.ok(this.recipeService.getRecipes());
 	}
 	
-	@GetMapping("/recipe/{id}")
+	@GetMapping("/recipes/{id}")
 	public ResponseEntity<Recipe> showById(@PathVariable String id, Model model) {
 
 		//model.addAttribute("recipe", recipeService.findById(new Long(id)));

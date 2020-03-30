@@ -28,7 +28,7 @@
                                 <tr *ngFor="let ingredient of recipe?.ingredients">
                                     <td>{{ ingredient.id }}</td>
                                     <td>{{ ingredient.description }}</td>
-                                    <td><a routerLink="/recipe/{{ recipe.id }}/ingredient/{{ingredient.id}}">View</a></td>
+                                    <td><a routerLink="/ingredients/{{ingredient.id}}">View</a></td>
                                     <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update'}">Update</a></td>
                                     <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>
                                 </tr>
