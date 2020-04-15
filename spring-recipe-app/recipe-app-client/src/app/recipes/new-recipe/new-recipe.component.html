@@ -12,9 +12,9 @@
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Recipe Description:</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
+                                    <input
+                                        type="text"
+                                        class="form-control"
                                         ngModel
                                         #name="ngModel"
                                         type="text"
@@ -25,18 +25,15 @@
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
+                                    <ul>
+
+                                    </ul>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 1
-                                        </label>
-                                    </div>
-                                    <div class="radio" th:remove="all">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 2
+                                        <label *ngFor="let category of categories">
+                                            <input  type="checkbox" ngValue="category"/>
+                                            {{ category.description}}
                                         </label>
                                     </div>
                                 </div>
@@ -44,9 +41,9 @@
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Prep Time:</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
+                                    <input
+                                        type="text"
+                                        class="form-control"
                                         ngModel
                                         #prepTime="ngModel"
                                         name="prepTime"
@@ -54,9 +51,9 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Cooktime:</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
+                                    <input
+                                        type="text"
+                                        class="form-control"
                                         ngModel
                                         #cookTime="ngModel"
                                         name="cookTime"
@@ -72,9 +69,9 @@
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Servings:</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
+                                    <input
+                                        type="text"
+                                        class="form-control"
                                         ngModel
                                         #servings="ngModel"
                                         name="servings"
@@ -82,9 +79,9 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Source:</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
+                                    <input
+                                        type="text"
+                                        class="form-control"
                                         ngModel
                                         #source="ngModel"
                                         name="source"
@@ -92,9 +89,9 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>URL:</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
+                                    <input
+                                        type="text"
+                                        class="form-control"
                                         ngModel
                                         #url="ngModel"
                                         name="url"
@@ -134,9 +131,9 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <textarea 
-                                        class="form-control" 
-                                        rows="3" 
+                                    <textarea
+                                        class="form-control"
+                                        rows="3"
                                         ngModel
                                         name="directions"
                                         #directions="ngModel"
@@ -153,9 +150,9 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <textarea 
-                                        class="form-control" 
-                                        rows="3" 
+                                    <textarea
+                                        class="form-control"
+                                        rows="3"
                                         ngModel
                                         name="notes"
                                         #notes="ngModel"

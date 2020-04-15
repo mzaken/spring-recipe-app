@@ -1,7 +1,10 @@
+import { IngredientService } from './../../services/ingredient.service';
+import { Ingredient } from './../ingredient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/recipes/recipe';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'ingredient-list',
@@ -12,6 +15,7 @@ export class IngredientListComponent implements OnInit {
   recipe: Recipe;
 
   constructor(private recipeService: RecipeService,
+              private ingredientServie: IngredientService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -26,7 +30,14 @@ export class IngredientListComponent implements OnInit {
   }
 
   newIngredient() {
-    this.router.navigate([''])
+    this.router.navigate(['/recipes', this.recipe.id, 'ingredients', 'new']);
   }
 
+  deleteIngredient(id : number){
+    this.ingredientServie.delete(id)
+      .subscribe( () => {
+        this.recipe.ingredients = this.recipe.ingredients.filter(ingredient => ingredient.id != id);
+        console.log(this.recipe.ingredients);
+      });
+  }
 }

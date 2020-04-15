@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +24,6 @@ import guru.springframework.services.RecipeService;
  * Created on 26 Jan 2020
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class RecipeController {
 	
 	private final RecipeService recipeService;
@@ -70,10 +69,17 @@ public class RecipeController {
 		return "redirect:/recipe/" + savedCommand.getId() + "/show";
 	}
 	
-	@GetMapping("/recipe/{id}/delete")
-	public String deleteRecipe(@PathVariable String id) {
-		recipeService.deleteById(Long.valueOf(id));
+//	@GetMapping("/recipe/{id}/delete")
+//	public String deleteRecipe(@PathVariable String id) {
+//		recipeService.deleteById(Long.valueOf(id));
+//		
+//		return "redirect:/";
+//	}
+	
+	@DeleteMapping("recipes/{id}")
+	public void deleteRecipe(@PathVariable String id) {
 		
-		return "redirect:/";
+		this.recipeService.deleteById(Long.valueOf(id));
 	}
+	
 }

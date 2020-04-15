@@ -2,11 +2,11 @@ import { RecipeService } from './services/recipe.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { RecipeListComponent } from './recipes/recipes-list/recipes-list.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RouterModule } from '@angular/router';
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
@@ -15,31 +15,36 @@ import { ImageService } from './services/image.service';
 import { IngredientService } from './services/ingredient.service';
 import { IngredientListComponent } from './ingredients/ingredient-list/ingredient-list.component';
 import { IngredientDetailComponent } from './ingredients/ingredient-detail/ingredient-detail.component';
+import { IngredientAddComponent } from './ingredients/ingredient-add/ingredient-add.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    RecipeListComponent,
     RecipeDetailComponent,
     NewRecipeComponent,
     RecipeImageComponent,
     IngredientListComponent,
-    IngredientDetailComponent
+    IngredientDetailComponent,
+    IngredientAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
+      { path: 'ingredients/:ingredientId/edit', component: IngredientAddComponent},
       { path: 'ingredients/:ingredientId', component: IngredientDetailComponent},
+      { path: 'recipes/:id/ingredients/new', component: IngredientAddComponent},
       { path: 'recipes/:id/update', component: NewRecipeComponent},
-      { path: 'recipes/:id/ingredient', component: IngredientListComponent},
+      { path: 'recipes/:id/ingredients', component: IngredientListComponent},
       { path: 'recipes/:id/image', component: RecipeImageComponent},
+      { path: 'recipes/new', component: NewRecipeComponent},
       { path: 'recipes/:id', component: RecipeDetailComponent},
-      { path: 'recipe/new', component: NewRecipeComponent},
-      { path: '', component: HomeComponent }
+      { path: '', component: RecipeListComponent }
     ])
   ],
   providers: [RecipeService, ImageService, IngredientService],

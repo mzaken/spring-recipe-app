@@ -1,4 +1,4 @@
-import { Category } from './category';
+import { Category } from '../categories/category';
 import { Notes } from './notes';
 import { Ingredient } from '../ingredients/ingredient';
 

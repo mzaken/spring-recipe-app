@@ -37,4 +37,11 @@ public class UnitOfMeasureServiceJPA implements UnitOfMeasureService {
 				.map(uomToUomCommand::convert)
 				.collect(Collectors.toSet());
 	}
+
+	@Override
+	public Set<UnitOfMeasure> getAllUom() {
+		return StreamSupport.stream(uomRepository.findAll().spliterator(), false).collect(Collectors.toSet());
+	}
+	
+	
 }

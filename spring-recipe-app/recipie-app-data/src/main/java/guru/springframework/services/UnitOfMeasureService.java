@@ -11,5 +11,7 @@ public interface UnitOfMeasureService {
 	Optional<UnitOfMeasure> findByDescription(String string);
 	
 	Set<UnitOfMeasureCommand> getAllUomCommands();
+	
+	Set<UnitOfMeasure> getAllUom();
 
 }

@@ -23,4 +23,6 @@ public interface IngredientService {
 	Ingredient getByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
 	
 	Ingredient getIngredientById(Long ingredientId);
+	
+	void deleteById(Long ingredientId);
 }

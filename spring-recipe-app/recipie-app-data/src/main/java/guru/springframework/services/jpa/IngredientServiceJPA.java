@@ -59,24 +59,8 @@ public class IngredientServiceJPA implements IngredientService{
 
 	@Override
 	public Ingredient saveIngredient(Ingredient ingredient) {
-		Optional<Ingredient> oldIngredientOptional= ingredientRepository.findById(ingredient.getId());
 		
-		if (!oldIngredientOptional.isPresent() ) {
-			//TODO: finish implementation for new ingredient. (how to connect it to recipe)
-		}
-		
-		Ingredient oldIngredient = oldIngredientOptional.get();
-		
-		if (oldIngredient.getRecipe() == null ) {
-			//TODO: handle error
-			log.error("could not find recipe for ingredient with id: " + ingredient.getId());
-		}
-		
-		oldIngredient.setAmount(ingredient.getAmount());
-		oldIngredient.setDescription(ingredient.getDescription());
-		oldIngredient.setUom(ingredient.getUom());
-		
-		return ingredientRepository.save(oldIngredient);
+		return ingredientRepository.save(ingredient);
 	}
 	
 	@Override
@@ -194,5 +178,13 @@ public class IngredientServiceJPA implements IngredientService{
 		
 		return ingredientOptional.get();
 	}
+
+	@Override
+	public void deleteById(Long ingredientId) {
+
+		ingredientRepository.deleteById(ingredientId);
+	}
+	
+	
 	
 }

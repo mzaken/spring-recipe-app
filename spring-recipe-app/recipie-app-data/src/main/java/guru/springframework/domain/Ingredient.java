@@ -36,12 +36,12 @@ public class Ingredient {
 
 	private String description;
 	private BigDecimal amount;
-
+	
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure uom;
 
-	@JsonBackReference
 	@ManyToOne
+	@JsonBackReference(value = "ingredients")
 	private Recipe recipe;
 	
 	public Ingredient() {}

@@ -24,7 +24,7 @@ public class Notes {
 	@Lob
 	private String notes;
 
-	@JsonBackReference
+	@JsonBackReference(value = "notes")
 	@OneToOne
 	private Recipe recipe;
 }

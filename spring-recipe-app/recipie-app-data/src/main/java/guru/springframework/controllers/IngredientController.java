@@ -1,13 +1,17 @@
 package guru.springframework.controllers;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.springframework.commands.IngredientCommand;
@@ -21,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class IngredientController {
 	private final RecipeService recipeService;
 	private final IngredientService ingredientService;
@@ -84,26 +87,19 @@ public class IngredientController {
 		return "recipe/ingredient/ingredientform";
 	}
 
-	/*
-	 * @PostMapping("recipe/{recipeid}/ingredient") public String
-	 * saveOrUpdate(@ModelAttribute IngredientCommand command) { IngredientCommand
-	 * savedCommand = ingredientService.saveIngredientCommand(command);
-	 * 
-	 * log.debug("saved receipe id:" + savedCommand.getRecipeId());
-	 * log.debug("saved ingredient id:" + savedCommand.getId());
-	 * 
-	 * return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" +
-	 * savedCommand.getId() + "/show"; }
-	 */
-	
-	@PostMapping("ingredients/{id}")
-	public Ingredient saveOrUpdate(@ModelAttribute Ingredient ingredient) {
+	@RequestMapping(value = "/ingredients", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
 		Ingredient savedIngredient = ingredientService.saveIngredient(ingredient);
 		
 		log.debug("saved receipe id:" + savedIngredient.getRecipe().getId());
 		log.debug("saved ingredient id:" + savedIngredient.getId());
 		
 		return savedIngredient;
+	}
+	
+	@DeleteMapping("ingredients/{id}")
+	public void deleteIngredient(@PathVariable Long id) {
+		ingredientService.deleteById(id);
 	}
 	
 	@GetMapping("recipe/{recipeId}/ingredient/new")

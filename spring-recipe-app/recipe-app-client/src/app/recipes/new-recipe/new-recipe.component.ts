@@ -1,5 +1,6 @@
-import { Difficulty } from './../difficulty';
-import { RecipeService } from './../../services/recipe.service';
+import { Category } from './../../categories/category';
+import { Difficulty } from '../difficulty';
+import { RecipeService } from '../../services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Recipe } from '../recipe';
@@ -12,9 +13,10 @@ import { Recipe } from '../recipe';
 export class NewRecipeComponent implements OnInit {
   recipe: Recipe;
   difficulties = Object.values(Difficulty);
+  categories: Category[];
 
   constructor(
-      private recipeService: RecipeService, 
+      private recipeService: RecipeService,
       private router: Router,
       private route: ActivatedRoute) { }
 
@@ -25,7 +27,10 @@ export class NewRecipeComponent implements OnInit {
         id = params.get('id');
         if (id != null) {
           this.recipeService.get(id)
-            .subscribe(recipe => this.recipe = recipe);
+            .subscribe(recipe => {
+              this.recipe = recipe
+              this.categories = recipe.categories;
+            });
         }
       })
   }

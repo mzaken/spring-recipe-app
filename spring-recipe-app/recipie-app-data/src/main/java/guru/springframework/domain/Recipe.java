@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -46,8 +47,8 @@ public class Recipe {
 	@Lob
 	private String directions;
 	
-	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+	@JsonManagedReference(value = "ingredients")
 	private Set<Ingredient> ingredients = new HashSet<>();
 	
 	@Lob
@@ -56,15 +57,15 @@ public class Recipe {
 	@Enumerated(value = EnumType.STRING)
 	private Difficulty difficulty;
 	
-	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
+	@JsonManagedReference(value = "notes")
 	private Notes notes;
 	
-	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name = "recipe_category",
 			joinColumns = @JoinColumn(name = "recipe_id"),
 			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	@JsonIgnore
 	private Set<Category> categories = new HashSet<>();
 
 	public void setNotes(Notes notes) {
