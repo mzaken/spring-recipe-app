@@ -8,7 +8,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import guru.springframework.commands.CategoryCommand;
-import guru.springframework.domain.Category;
+import guru.springframework.model.Category;
 import lombok.Synchronized;
 
 /**

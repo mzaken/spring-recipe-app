@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.model.UnitOfMeasure;
 
 /**
  * @author Maor Zaken

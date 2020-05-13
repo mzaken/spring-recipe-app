@@ -1,7 +1,7 @@
 /**
  * 
  */
-package guru.springframework.domain;
+package guru.springframework.model;
 
 import java.math.BigDecimal;
 

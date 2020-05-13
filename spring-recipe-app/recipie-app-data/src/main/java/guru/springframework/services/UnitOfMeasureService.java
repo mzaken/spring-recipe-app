@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import guru.springframework.commands.UnitOfMeasureCommand;
-import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.model.UnitOfMeasure;
 
 public interface UnitOfMeasureService {
 

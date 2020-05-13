@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Recipe;
 import guru.springframework.services.RecipeService;
 
 public class IndexControllerTest {

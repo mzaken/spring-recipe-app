@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Recipe;
 import guru.springframework.services.RecipeService;
 
 /**

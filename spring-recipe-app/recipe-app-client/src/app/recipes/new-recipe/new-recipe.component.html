@@ -2,7 +2,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form #f="ngForm" (ngSubmit)="submit(f)">
+            <form #f="ngForm" (ngSubmit)="addRecipe(f.value)">
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -15,24 +15,19 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        ngModel
-                                        #name="ngModel"
                                         type="text"
-                                        name="description"
+                                        formControlName="description"
                                         value="{{ recipe?.description }}"/>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 form-group">
+                                <div class="col-md-1 form-group">
                                     <label>Categories:</label>
-                                    <ul>
-
-                                    </ul>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <div class="radio">
                                         <label *ngFor="let category of categories">
-                                            <input  type="checkbox" ngValue="category"/>
+                                            <input type="checkbox" ngValue="category"/>
                                             {{ category.description}}
                                         </label>
                                     </div>

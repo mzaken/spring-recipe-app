@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import guru.springframework.commands.CategoryCommand;
-import guru.springframework.domain.Category;
+import guru.springframework.model.Category;
 
 /**
  * @author Maor Zaken

@@ -1,4 +1,4 @@
-package guru.springframework.domain;
+package guru.springframework.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +29,6 @@ import lombok.Data;
  * Created on Jan 17, 2020
  */
 @Data
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
 public class Recipe {
 	
@@ -65,7 +64,6 @@ public class Recipe {
 	@JoinTable(name = "recipe_category",
 			joinColumns = @JoinColumn(name = "recipe_id"),
 			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	@JsonIgnore
 	private Set<Category> categories = new HashSet<>();
 
 	public void setNotes(Notes notes) {

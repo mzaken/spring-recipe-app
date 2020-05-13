@@ -4,7 +4,7 @@
 package guru.springframework.services;
 
 import guru.springframework.commands.IngredientCommand;
-import guru.springframework.domain.Ingredient;
+import guru.springframework.model.Ingredient;
 
 /**
  * @author Maor Zaken

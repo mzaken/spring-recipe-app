@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import guru.springframework.commands.NotesCommand;
-import guru.springframework.domain.Notes;
+import guru.springframework.model.Notes;
 
 /**
  * @author Maor Zaken

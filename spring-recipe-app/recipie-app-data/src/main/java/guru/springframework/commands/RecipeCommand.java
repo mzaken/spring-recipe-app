@@ -6,7 +6,7 @@ package guru.springframework.commands;
 import java.util.HashSet;
 import java.util.Set;
 
-import guru.springframework.domain.Difficulty;
+import guru.springframework.model.Difficulty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

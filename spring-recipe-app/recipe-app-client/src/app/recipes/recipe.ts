@@ -2,7 +2,7 @@ import { Category } from '../categories/category';
 import { Notes } from './notes';
 import { Ingredient } from '../ingredients/ingredient';
 
-export interface Recipe {
+export class Recipe {
     id: number;
     description: string;
     prepTime: number;

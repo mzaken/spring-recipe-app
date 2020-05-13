@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import guru.springframework.commands.NotesCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
-import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.model.UnitOfMeasure;
 
 import static org.junit.Assert.*;
 

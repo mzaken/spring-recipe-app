@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
-import guru.springframework.domain.Ingredient;
+import guru.springframework.model.Ingredient;
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;

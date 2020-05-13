@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 
 import guru.springframework.commands.UnitOfMeasureCommand;
 import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
-import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.model.UnitOfMeasure;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.UnitOfMeasureService;
 

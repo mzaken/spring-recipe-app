@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 
 /**

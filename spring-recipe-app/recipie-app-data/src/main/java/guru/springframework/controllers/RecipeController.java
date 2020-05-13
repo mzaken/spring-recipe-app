@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Recipe;
 import guru.springframework.services.RecipeService;
 
 /**

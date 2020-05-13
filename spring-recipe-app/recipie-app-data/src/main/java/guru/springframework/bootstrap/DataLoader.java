@@ -13,12 +13,12 @@ import javax.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import guru.springframework.domain.Category;
-import guru.springframework.domain.Difficulty;
-import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.Notes;
-import guru.springframework.domain.Recipe;
-import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.model.Category;
+import guru.springframework.model.Difficulty;
+import guru.springframework.model.Ingredient;
+import guru.springframework.model.Notes;
+import guru.springframework.model.Recipe;
+import guru.springframework.model.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;

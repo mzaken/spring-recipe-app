@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import guru.springframework.commands.IngredientCommand;
-import guru.springframework.domain.Ingredient;
+import guru.springframework.model.Ingredient;
 
 /**
  * @author Maor Zaken

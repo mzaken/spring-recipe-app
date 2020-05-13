@@ -5,8 +5,8 @@ package guru.springframework.commands;
 
 import java.math.BigDecimal;
 
-import guru.springframework.domain.Recipe;
-import guru.springframework.domain.UnitOfMeasure;
+import guru.springframework.model.Recipe;
+import guru.springframework.model.UnitOfMeasure;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

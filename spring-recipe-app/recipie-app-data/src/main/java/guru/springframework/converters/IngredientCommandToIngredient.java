@@ -8,8 +8,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import guru.springframework.commands.IngredientCommand;
-import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Ingredient;
+import guru.springframework.model.Recipe;
 import lombok.Synchronized;
 
 /**

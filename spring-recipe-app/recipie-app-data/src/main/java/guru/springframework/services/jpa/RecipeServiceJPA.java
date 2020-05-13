@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;

@@ -6,7 +6,7 @@ package guru.springframework.services;
 import java.util.Set;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.domain.Recipe;
+import guru.springframework.model.Recipe;
 
 /**
  * @author Maor Zaken
