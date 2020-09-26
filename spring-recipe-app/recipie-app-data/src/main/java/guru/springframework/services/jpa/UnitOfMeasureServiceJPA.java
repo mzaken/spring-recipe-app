@@ -7,8 +7,6 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
-import guru.springframework.commands.UnitOfMeasureCommand;
-import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.model.UnitOfMeasure;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.UnitOfMeasureService;
@@ -17,12 +15,9 @@ import guru.springframework.services.UnitOfMeasureService;
 public class UnitOfMeasureServiceJPA implements UnitOfMeasureService {
 	
 	private final UnitOfMeasureRepository uomRepository;
-	private final UnitOfMeasureToUnitOfMeasureCommand uomToUomCommand;
 	
-	public UnitOfMeasureServiceJPA(UnitOfMeasureRepository uomRepository,
-			UnitOfMeasureToUnitOfMeasureCommand uomToUomCommand) {
+	public UnitOfMeasureServiceJPA(UnitOfMeasureRepository uomRepository) {
 		this.uomRepository = uomRepository;
-		this.uomToUomCommand = uomToUomCommand;
 	}
 
 	@Override
@@ -31,13 +26,6 @@ public class UnitOfMeasureServiceJPA implements UnitOfMeasureService {
 		return uomRepository.findByDescription(string);
 	}
 	
-	@Override
-	public Set<UnitOfMeasureCommand> getAllUomCommands() {
-		return  StreamSupport.stream(uomRepository.findAll().spliterator(), false)
-				.map(uomToUomCommand::convert)
-				.collect(Collectors.toSet());
-	}
-
 	@Override
 	public Set<UnitOfMeasure> getAllUom() {
 		return StreamSupport.stream(uomRepository.findAll().spliterator(), false).collect(Collectors.toSet());

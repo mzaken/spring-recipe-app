@@ -11,9 +11,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import guru.springframework.commands.RecipeCommand;
-import guru.springframework.converters.RecipeCommandToRecipe;
-import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.model.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.services.RecipeService;
@@ -27,14 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 public class RecipeServiceJPA implements RecipeService {
 
 	private final RecipeRepository recipeRepository;
-	private final RecipeCommandToRecipe recipeCommandToRecipe;
-	private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-	public RecipeServiceJPA(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe,
-			RecipeToRecipeCommand recipeToRecipeCommand) {
+	public RecipeServiceJPA(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
-		this.recipeCommandToRecipe = recipeCommandToRecipe;
-		this.recipeToRecipeCommand = recipeToRecipeCommand;
 	}
 
 	public Recipe findById(Long id) {
@@ -59,22 +51,6 @@ public class RecipeServiceJPA implements RecipeService {
 		return recipeRepository.save(recipe);
 	}
 	
-	@Transactional
-	@Override
-	public RecipeCommand saveRecipeCommand(RecipeCommand command) {
-		Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
-		
-		Recipe savedRecipe = recipeRepository.save(detachedRecipe);
-		log.debug("Saved Recipe: " + savedRecipe.getId());
-		return recipeToRecipeCommand.convert(savedRecipe) ;
-	}
-	
-	@Transactional
-	@Override
-	public RecipeCommand findCommandById(Long id) {
-		return recipeToRecipeCommand.convert(findById(id));
-	}
-
 	@Override
 	public void deleteById(Long id) {
 		recipeRepository.deleteById(id);

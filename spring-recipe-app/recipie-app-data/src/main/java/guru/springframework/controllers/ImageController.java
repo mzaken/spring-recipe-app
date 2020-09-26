@@ -1,6 +1,5 @@
 package guru.springframework.controllers;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +29,7 @@ public class ImageController {
 
 	@GetMapping("/recipe/{recipeId}/image")
 	public String showImageForm(@PathVariable String recipeId, Model model) {
-		model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeId)));
+		model.addAttribute("recipe", recipeService.findById(Long.valueOf(recipeId)));
 		
 		return "/recipe/imageUploadForm.html";
 	}

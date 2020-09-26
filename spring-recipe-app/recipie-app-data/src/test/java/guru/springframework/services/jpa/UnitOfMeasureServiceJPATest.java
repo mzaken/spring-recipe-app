@@ -15,8 +15,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import guru.springframework.commands.UnitOfMeasureCommand;
-import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.model.UnitOfMeasure;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.services.UnitOfMeasureService;
@@ -32,7 +30,7 @@ public class UnitOfMeasureServiceJPATest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		
-		service = new UnitOfMeasureServiceJPA(uomRepository, new UnitOfMeasureToUnitOfMeasureCommand());
+		service = new UnitOfMeasureServiceJPA(uomRepository);
 	}
 
 	@Test
@@ -67,10 +65,10 @@ public class UnitOfMeasureServiceJPATest {
 		when(uomRepository.findAll()).thenReturn(uoms);
 		
 		//when
-		Set<UnitOfMeasureCommand> commands = service.getAllUomCommands();
+		Set<UnitOfMeasure> allUom = service.getAllUom();
 		
 		//then
-		assertEquals(2, commands.size());
+		assertEquals(2, allUom.size());
 		verify(uomRepository, times(1)).findAll();
 	}
 

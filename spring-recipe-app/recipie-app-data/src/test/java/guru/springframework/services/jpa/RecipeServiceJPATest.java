@@ -6,7 +6,10 @@ package guru.springframework.services.jpa;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,8 +20,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import guru.springframework.converters.RecipeCommandToRecipe;
-import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.model.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.services.RecipeService;
@@ -34,19 +35,13 @@ class RecipeServiceJPATest {
 	RecipeService recipeService;
 	
 	@Mock
-	RecipeToRecipeCommand recipeToRecipeCommand;
-	
-	@Mock
-	RecipeCommandToRecipe recipeCommandToRecipe;
-	
-	@Mock
 	RecipeRepository recipeRepository;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		
-		recipeService = new RecipeServiceJPA(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+		recipeService = new RecipeServiceJPA(recipeRepository);
 	}
 
 	@Test

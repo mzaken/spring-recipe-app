@@ -13,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import guru.springframework.commands.RecipeCommand;
-import guru.springframework.converters.RecipeCommandToRecipe;
-import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.model.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 
@@ -34,29 +31,22 @@ public class RecipeServiceIT {
 	@Autowired
 	RecipeRepository recipeRepository;
 
-	@Autowired
-	RecipeToRecipeCommand recipeToRecipeCommand;
-
-	@Autowired
-	RecipeCommandToRecipe recipeCommandToRecipe;
-
 	@Transactional
 	@Test
 	public void test() {
 		//given
 		Iterable<Recipe> recipes = recipeRepository.findAll();
 		Recipe recipe = recipes.iterator().next();
-		RecipeCommand command = recipeToRecipeCommand.convert(recipe);
 		
 		//when
-		command.setDescription(DESCRIPTION);
-		RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
+		recipe.setDescription(DESCRIPTION);
+		Recipe savedRecipe= recipeService.save(recipe);
 		
 		//then
-		assertEquals(DESCRIPTION, savedCommand.getDescription());
-		assertEquals(recipe.getId(), savedCommand.getId());
-		assertEquals(recipe.getCategories().size(), savedCommand.getCategories().size());
-		assertEquals(recipe.getIngredients().size(), savedCommand.getIngredients().size());
+		assertEquals(DESCRIPTION, savedRecipe.getDescription());
+		assertEquals(recipe.getId(), savedRecipe.getId());
+		assertEquals(recipe.getCategories().size(), savedRecipe.getCategories().size());
+		assertEquals(recipe.getIngredients().size(), savedRecipe.getIngredients().size());
 	}
 
 }

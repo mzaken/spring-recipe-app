@@ -4,24 +4,19 @@
 package guru.springframework.services.jpa;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import guru.springframework.commands.IngredientCommand;
-import guru.springframework.converters.IngredientCommandToIngredient;
-import guru.springframework.converters.IngredientToIngredientCommand;
-import guru.springframework.converters.UnitOfMeasureCommandToUnitOfMeasure;
-import guru.springframework.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.model.Ingredient;
 import guru.springframework.model.Recipe;
 import guru.springframework.repositories.IngredientRepository;
@@ -32,6 +27,7 @@ import guru.springframework.services.IngredientService;
 /**
  * @author Maor Zaken Created on Feb 1, 2020
  */
+
 public class IngredientServiceJPATest {
 
 	@Mock
@@ -45,19 +41,17 @@ public class IngredientServiceJPATest {
 	
 	IngredientService ingredientService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		ingredientService = new IngredientServiceJPA(
+		ingredientService = new IngredientServiceJPA (
 				recipeRepository, 
-				new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
-				new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
 				uomRepository,
 				ingredientRepository);
 	}
-
+	
 	@Test
-	public void testFindByRecipeIdAndIngredientId() {
+	public void findIngredientById() {
 		//given
 		Recipe recipe = new Recipe();
 		recipe.setId(1L);
@@ -75,18 +69,18 @@ public class IngredientServiceJPATest {
 		recipe.addIngredient(ingredient2);
 		recipe.addIngredient(ingredient3);
 		
-		when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
+		when(ingredientRepository.findById(anyLong())).thenReturn(Optional.of(ingredient3));
 		
 		//when
-		IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId(1L, 3L);
+		Ingredient ingredient = ingredientService.getIngredientById(3L);
 		
 		//then
-		assertEquals(3L, ingredientCommand.getId());
-		assertEquals(1L, ingredientCommand.getRecipeId());
+		assertEquals(3L, ingredient.getId());
+		assertEquals(1L, ingredient.getRecipe().getId());
 	}
 	
 	@Test
-	public void testDeleteByRecipeIdAndIngredientId() {
+	public void deleteById() {
 		//given
 		Recipe recipe = new Recipe();
 		recipe.setId(1L);
@@ -96,16 +90,15 @@ public class IngredientServiceJPATest {
 	    recipe.addIngredient(ingredient1);
 	    ingredient1.setRecipe(recipe);
 	    
-	    Optional<Recipe> recipeOptional = Optional.of(recipe);
+	    Optional<Ingredient> ingredientOptional = Optional.of(ingredient1);
 	    
-	    when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+	    when(ingredientRepository.findById(anyLong())).thenReturn(ingredientOptional);
 	    
 	    //when
-	    ingredientService.deleteByRecipeIdAndIngredientId(1L, 1L);
+	    ingredientService.deleteById(1L);
 	    
 	    //then
-	    verify(recipeRepository, times(1)).findById(anyLong());
-	    verify(recipeRepository, times(1)).save(any(Recipe.class));
+	    verify(ingredientRepository, times(1)).deleteById(anyLong());
 	}
-
+	
 }
